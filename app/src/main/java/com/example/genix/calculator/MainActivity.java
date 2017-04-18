@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    static double result = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +30,55 @@ public class MainActivity extends AppCompatActivity {
     public void clear(View view) {
         TextView mainText = (TextView) findViewById(R.id.mainView);
         mainText.setText("");
+        result = 0;
     }
+
+    public void getResult(View view) {
+
+        TextView mainText = (TextView) findViewById(R.id.mainView);
+
+        mainText.setText(String.valueOf(result));
+
+    }
+
+    public void calculations(){
+
+
+        TextView mainText = (TextView) findViewById(R.id.mainView);
+        String string = mainText.getText().toString();
+        char[] ourArr = string.toCharArray();
+
+        String number1 = "";
+        String number2 = "";
+
+        char sign = 'a';
+
+        for(int i = 0 ; i < ourArr.length ; ++i){
+
+            if(Character.isDigit(ourArr[i]))
+                ;
+            else {
+                sign = ourArr[i];
+                break;
+            }
+            if(sign != 'a'){
+                number1 += ourArr[i];
+            }
+            else
+                number2 += ourArr[i];
+        }
+
+        switch (sign){
+            case '+': result = Double.parseDouble(number1) + Double.parseDouble(number2);
+                break;
+            case '-': result = Double.parseDouble(number1) - Double.parseDouble(number2);
+                break;
+            case '/': result = Double.parseDouble(number1) / Double.parseDouble(number2);
+                break;
+            case '*': result = Double.parseDouble(number1) * Double.parseDouble(number2);
+                break;
+        }
+
+    }
+
 }
