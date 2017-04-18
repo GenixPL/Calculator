@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         TextView mainText = (TextView) findViewById(R.id.mainView);
         calculations();
-        mainText.setText(String.valueOf(result));
+        DecimalFormat df = new DecimalFormat("#.#####");
+        mainText.setText(String.valueOf(df.format(result)));
 
     }
 
@@ -54,16 +55,14 @@ public class MainActivity extends AppCompatActivity {
         char sign = 'a';
 
         for(int i = 0 ; i < ourArr.length ; ++i){
-
-            if(Character.isDigit(ourArr[i])) {
-                if (sign != 'a') {
+            if(Character.isDigit(ourArr[i]) || ourArr[i] == '.') {
+                if (sign == 'a') {
                     number1 += ourArr[i];
                 } else
                     number2 += ourArr[i];
-            } else {
+            } else if(ourArr[i] != ' '){
                 sign = ourArr[i];
             }
-
         }
 
         switch (sign){
