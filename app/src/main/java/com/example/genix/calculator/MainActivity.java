@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public void getResult(View view) {
 
         TextView mainText = (TextView) findViewById(R.id.mainView);
-
+        calculations();
         mainText.setText(String.valueOf(result));
 
     }
@@ -55,17 +55,15 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i = 0 ; i < ourArr.length ; ++i){
 
-            if(Character.isDigit(ourArr[i]))
-                ;
-            else {
+            if(Character.isDigit(ourArr[i])) {
+                if (sign != 'a') {
+                    number1 += ourArr[i];
+                } else
+                    number2 += ourArr[i];
+            } else {
                 sign = ourArr[i];
-                break;
             }
-            if(sign != 'a'){
-                number1 += ourArr[i];
-            }
-            else
-                number2 += ourArr[i];
+
         }
 
         switch (sign){
