@@ -3,8 +3,8 @@ package com.example.genix.calculator;
 
  class MathFunctions {
 
-    private double number1;
-    private double number2;
+    private double number1 = 0;
+    private double number2 = 0;
     private char sign = 'a';
 
     //Assign values of variables

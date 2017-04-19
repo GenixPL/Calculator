@@ -17,14 +17,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mainText = (TextView) findViewById(R.id.mainView);  //TO REMEMBER
+        mainText = (TextView) findViewById(R.id.mainView);   //TO REMEMBER (PLACE OF THAT)
+    }
+
+    public void writeNum(View view) {
+        Button tempBut = (Button) view;
+        mainText.setText(mainText.getText() + tempBut.getText().toString());
     }
 
     public void write(View view) {
+
+        //if empty don't do anythig
+        if(mainText.getText().toString().isEmpty())
+            return;
+
         Button tempBut = (Button) view;
+        TextFunctions text = new TextFunctions(mainText.getText());
 
-        mainText.setText(mainText.getText() + tempBut.getText().toString());
-
+        if(text.returnLastChar() != ' ')
+                mainText.setText(mainText.getText() + tempBut.getText().toString());
+        else {
+                mainText.setText(text.returnWithoutSigh());
+                mainText.setText(mainText.getText() + tempBut.getText().toString());
+        }
     }
 
     public void clear(View view) {
@@ -34,11 +49,17 @@ public class MainActivity extends AppCompatActivity {
 
     //Change value of result and give it to TextView
     public void getResult(View view) {
+
+        //if empty don't do anythig
+        if(mainText.getText().toString().isEmpty())
+            return;
+
         MathFunctions functions = new MathFunctions();
 
         functions.calculations(mainText.getText().toString());
         DecimalFormat df = new DecimalFormat("#.#####");
         mainText.setText(String.valueOf(df.format(result)));
     }
+
 
 }
