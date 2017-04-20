@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class TextFunctions {
 
-    ArrayList <Character> ourText;
+    private ArrayList <Character> ourText;
 
     TextFunctions(CharSequence ourText){
         this.ourText = new ArrayList(0);

@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         MathFunctions functions = new MathFunctions(mainText.getText());
 
-        //functions.changeResult();
+        functions.changeResult();
         DecimalFormat df = new DecimalFormat("#.#####");
         mainText.setText(String.valueOf(df.format(result)));
     }

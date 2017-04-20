@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 class MathFunctions {
 
-    ArrayList <Double> ourNumbers;
-    ArrayList <Character> ourSigns;
-    double result;
+    private ArrayList <Double> ourNumbers;
+    private ArrayList <Character> ourSigns;
+    private double result;
 
     MathFunctions(CharSequence ourText){
         this.ourNumbers = new ArrayList(0);
@@ -39,6 +39,67 @@ class MathFunctions {
 
     //Change value of result(static from MainActivity)
     void changeResult(){
+        if (ourSigns.indexOf('(') == -1)
+            basicCalculations();
         MainActivity.result = result;
+    }
+
+    void basicCalculations(){
+        boolean greaterSignExists = false; //greater sign - with bigger priority
+        int curIndex;
+
+        for ( int i = (ourSigns.size() - 1) ; i >= 0 ; --i){
+            if(ourSigns.contains('*') || ourSigns.contains('/')) {
+                greaterSignExists = true;
+                curIndex = earlierSign();
+            } else {
+                curIndex = ourSigns.size() - 1;
+            }
+
+            double firstNum = ourNumbers.get(curIndex);
+            double secondNum = ourNumbers.get(curIndex + 1);
+            char currSign = ourSigns.get(curIndex);
+
+            if (greaterSignExists){
+                ourNumbers.set(curIndex, doCalculation(firstNum, secondNum, currSign));
+                ourNumbers.remove(curIndex + 1);
+                ourSigns.remove(curIndex);
+            } else {
+                ourNumbers.set(curIndex, doCalculation(firstNum, secondNum, currSign));
+                ourNumbers.remove(curIndex + 1);
+                ourSigns.remove(curIndex);
+            }
+
+            greaterSignExists = false;
+        }
+    }
+
+    //does basic calculations between two numbers and return it's result
+    double doCalculation(double firstNum, double secondNum, char sign){
+        switch (sign){
+            case '+': return firstNum + secondNum;
+            case '-': return firstNum - secondNum;
+            case '*': return firstNum * secondNum;
+            case '/': return firstNum / secondNum;
+        }
+    }
+
+    //returns the index of first sign with bigger priority
+    int earlierSign(){
+        boolean mulExists = false;
+        boolean divExists = false;
+
+        if(ourSigns.contains('*'))
+            mulExists = true;
+        if(ourSigns.contains('/'))
+            divExists = true;
+
+        if (mulExists && divExists)
+            return ourSigns.indexOf('*') < ourSigns.indexOf('/') ? ourSigns.indexOf('*') : ourSigns.indexOf('/');
+        else if(mulExists)
+            return ourSigns.indexOf('*');
+        else
+            return ourSigns.indexOf('/');
+
     }
 }
