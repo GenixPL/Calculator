@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
-    static double result = 0;
+    static double result;
     TextView mainText;
 
     @Override
@@ -22,24 +22,29 @@ public class MainActivity extends AppCompatActivity {
 
     public void writeNum(View view) {
         Button tempBut = (Button) view;
+
+        if ("0".equals(mainText.getText()))
+            mainText.setText("");
+
         mainText.setText(mainText.getText() + tempBut.getText().toString());
     }
 
     public void write(View view) {
-
-        //if empty don't do anythig
-        if(mainText.getText().toString().isEmpty())
-            return;
-
         Button tempBut = (Button) view;
         TextFunctions text = new TextFunctions(mainText.getText());
 
-        if(text.returnLastChar() != ' ')
-                mainText.setText(mainText.getText() + tempBut.getText().toString());
+        //if empty don't do anything except minus
+        if(mainText.getText().toString().isEmpty() && !"-".equals(tempBut.getText().toString()))
+            return;
+
+        if(text.isDigitLastOrEmpty())
+            mainText.setText(mainText.getText() + tempBut.getText().toString());
         else {
-                mainText.setText(text.returnWithoutSigh());
+            mainText.setText(text.returnWithoutSigh());
+            if(!text.returnString().isEmpty())
                 mainText.setText(mainText.getText() + tempBut.getText().toString());
         }
+
     }
 
     public void clear(View view) {
@@ -50,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
     //Change value of result and give it to TextView
     public void getResult(View view) {
 
-        //if empty don't do anythig
+        //if empty don't do anything
         if(mainText.getText().toString().isEmpty())
             return;
 
-        MathFunctions functions = new MathFunctions();
+        MathFunctions functions = new MathFunctions(mainText.getText());
 
-        functions.calculations(mainText.getText().toString());
+        //functions.changeResult();
         DecimalFormat df = new DecimalFormat("#.#####");
         mainText.setText(String.valueOf(df.format(result)));
     }

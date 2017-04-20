@@ -4,29 +4,45 @@ import android.content.Context;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class TextFunctions {
 
-    char[] ourText;
-    int len;
+    ArrayList <Character> ourText;
 
     TextFunctions(CharSequence ourText){
-        this.ourText = new char[ourText.length()];
-        for(int i = 0 ; i < ourText.length() ; ++i){
-            this.ourText[i] = ourText.charAt(i);
+        this.ourText = new ArrayList(0);
+
+        for (int i = 0 ; i < ourText.length() ; i++){
+            this.ourText.add(ourText.charAt(i));
         }
-        len = ourText.length();
+
     }
 
     //Return ourText without last 3 indexes with are representing sign
-    CharSequence returnWithoutSigh(){
-        String temp = "";
-        for (int i = 0 ; i < len - 3 ; ++i)
-            temp += ourText[i];
-        return temp;
+    String returnWithoutSigh(){
+        ourText.remove(ourText.size() - 1);
+        return returnString();
     }
 
-    char returnLastChar(){
-        return ourText[len - 1];
+    //checks if last char is digit or ourText is empty
+    boolean isDigitLastOrEmpty(){
+        if(!ourText.isEmpty()) {
+            if (Character.isDigit(ourText.get(ourText.size() - 1)))
+                return true;
+            else
+                return false;
+        }
+        else
+            return true;
+    }
+
+    String returnString(){
+        String temp = "";
+        for (char sign: ourText) {
+            temp += sign;
+        }
+        return temp;
     }
 
 }

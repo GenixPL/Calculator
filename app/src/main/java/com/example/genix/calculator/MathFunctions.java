@@ -1,55 +1,44 @@
 package com.example.genix.calculator;
 
 
- class MathFunctions {
+import java.util.ArrayList;
 
-    private double number1 = 0;
-    private double number2 = 0;
-    private char sign = 'a';
+class MathFunctions {
 
-    //Assign values of variables
-    private void setVariables(String textViewOutput){
+    ArrayList <Double> ourNumbers;
+    ArrayList <Character> ourSigns;
+    double result;
 
-        char[] ourArr = textViewOutput.toCharArray();
+    MathFunctions(CharSequence ourText){
+        this.ourNumbers = new ArrayList(0);
+        this.ourSigns = new ArrayList(0);
+        result = 0;
 
-        String number1 = "";
-        String number2 = "";
+        String tempNum = "";
 
-        sign = 'a';
+        for (int i = 0 ; i < ourText.length() ; ++i) {
 
-        for(int i = 0 ; i < ourArr.length ; ++i){
-            if(Character.isDigit(ourArr[i]) || ourArr[i] == '.') {
-                if (sign == 'a') {
-                    number1 += ourArr[i];
-                } else
-                    number2 += ourArr[i];
-            } else if(ourArr[i] != ' '){
-                sign = ourArr[i];
+            if(Character.isDigit(ourText.charAt(i)) || ourText.charAt(i) == '.')
+                tempNum += ourText.charAt(i);
+            else {
+                if("".equals(tempNum))
+                    ourNumbers.add((double) 0);
+                else
+                    ourNumbers.add(Double.parseDouble(tempNum));
+                tempNum = "";
+                ourSigns.add(ourText.charAt(i));
             }
+            //if there is nothing more
+            if (i + 1 == ourText.length())
+                if("".equals(tempNum))
+                    ourNumbers.add((double) 0);
+                else
+                    ourNumbers.add(Double.parseDouble(tempNum));
         }
-
-        this.number1 = Double.parseDouble(number1);
-        this.number2 = Double.parseDouble(number2);
-
-
     }
 
     //Change value of result(static from MainActivity)
-    void calculations(String textViewOutput){
-
-        setVariables(textViewOutput);
-
-        switch (sign){
-            case '+': MainActivity.result = number1 + number2;
-                break;
-            case '-': MainActivity.result = number1 - number2;
-                break;
-            case '/': MainActivity.result = number1 / number2;
-                break;
-            case '*': MainActivity.result = number1 * number2;
-                break;
-        }
-
+    void changeResult(){
+        MainActivity.result = result;
     }
-
 }
