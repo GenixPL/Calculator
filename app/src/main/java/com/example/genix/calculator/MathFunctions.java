@@ -49,12 +49,12 @@ class MathFunctions {
         boolean greaterSignExists = false; //greater sign - with bigger priority
         int curIndex;
 
-        for ( int i = (ourSigns.size() - 1) ; i >= 0 ; --i){
+        for ( int i = 0 ; ourSigns.size() != 0 ; ){
             if(ourSigns.contains('*') || ourSigns.contains('/')) {
                 greaterSignExists = true;
                 curIndex = earlierSign();
             } else {
-                curIndex = ourSigns.size() - 1;
+                curIndex = i;
             }
 
             double firstNum = ourNumbers.get(curIndex);
@@ -62,12 +62,12 @@ class MathFunctions {
             char currSign = ourSigns.get(curIndex);
 
             if (greaterSignExists){
-                ourNumbers.set(curIndex, doCalculation(firstNum, secondNum, currSign));
-                ourNumbers.remove(curIndex + 1);
+                ourNumbers.set(curIndex + 1, doCalculation(firstNum, secondNum, currSign));
+                ourNumbers.remove(curIndex);
                 ourSigns.remove(curIndex);
             } else {
-                ourNumbers.set(curIndex, doCalculation(firstNum, secondNum, currSign));
-                ourNumbers.remove(curIndex + 1);
+                ourNumbers.set(curIndex + 1, doCalculation(firstNum, secondNum, currSign));
+                ourNumbers.remove(curIndex);
                 ourSigns.remove(curIndex);
             }
 
