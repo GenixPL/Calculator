@@ -1,6 +1,8 @@
 package com.example.genix.calculator;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -8,16 +10,20 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
+import javax.xml.datatype.Duration;
+
 public class MainActivity extends AppCompatActivity {
 
     static double result;
     TextView mainText;
+    static private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainText = (TextView) findViewById(R.id.mainView);   //TO REMEMBER (PLACE OF THAT)
+        context = getApplicationContext();
     }
 
     public void writeNum(View view) {
@@ -65,6 +71,4 @@ public class MainActivity extends AppCompatActivity {
         DecimalFormat df = new DecimalFormat("#.#####");
         mainText.setText(String.valueOf(df.format(result)));
     }
-
-
 }

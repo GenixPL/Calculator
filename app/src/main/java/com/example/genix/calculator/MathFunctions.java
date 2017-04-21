@@ -3,6 +3,7 @@ package com.example.genix.calculator;
 
 import java.util.ArrayList;
 
+
 class MathFunctions {
 
     private ArrayList <Double> ourNumbers;
@@ -77,10 +78,11 @@ class MathFunctions {
     //does basic calculations between two numbers and return it's result
     double doCalculation(double firstNum, double secondNum, char sign){
         switch (sign){
-            case '+': return firstNum + secondNum;
-            case '-': return firstNum - secondNum;
-            case '*': return firstNum * secondNum;
-            case '/': return firstNum / secondNum;
+            case '+': return result = firstNum + secondNum;
+            case '-': return result = firstNum - secondNum;
+            case '*': return result = firstNum * secondNum;
+            case '/': return result = firstNum / secondNum;
+            default: return 0;
         }
     }
 
