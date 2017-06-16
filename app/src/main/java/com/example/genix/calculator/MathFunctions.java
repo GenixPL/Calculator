@@ -102,6 +102,5 @@ class MathFunctions {
             return ourSigns.indexOf('*');
         else
             return ourSigns.indexOf('/');
-
     }
 }

@@ -19,7 +19,9 @@
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <TableLayout
         android:layout_width="0dp"
@@ -30,15 +32,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainView"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.0"
+        android:id="@+id/tableLayout"
+        app:layout_constraintRight_toLeftOf="@+id/linearLayout"
+        android:layout_marginRight="0dp">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="1"
-            android:weightSum="4">
+            android:weightSum="3">
 
             <Button
                 android:id="@+id/but_7"
@@ -69,22 +73,13 @@
                 android:text="9"
                 android:textAlignment="center"
                 android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/add_but"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="write"
-                android:text="+" />
-
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="1"
-            android:weightSum="4">
+            android:weightSum="3">
 
             <Button
                 android:id="@+id/but_4"
@@ -115,23 +110,13 @@
                 android:text="6"
                 android:textAlignment="center"
                 android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/sub_but"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="write"
-                android:text="-"
-                android:textAlignment="center"
-                android:textStyle="bold" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="1"
-            android:weightSum="4">
+            android:weightSum="3">
 
             <Button
                 android:id="@+id/but_1"
@@ -162,32 +147,23 @@
                 android:text="3"
                 android:textAlignment="center"
                 android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/mult_but"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="write"
-                android:text="*"
-                android:textAlignment="center"
-                android:textStyle="bold" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:weightSum="4">
+            android:weightSum="3">
 
             <Button
-                android:id="@+id/clear_but"
+                android:id="@+id/dot_but"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="clear"
-                android:text="C"
+                android:onClick="write"
+                android:text="."
                 android:textAlignment="center"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <Button
@@ -208,20 +184,80 @@
                 android:onClick="getResult"
                 android:text="="
                 android:textAlignment="center"
+                android:textSize="20sp"
                 android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/div_but"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="write"
-                android:text="/"
-                android:textAlignment="center"
-                android:textStyle="bold" />
-
         </TableRow>
 
     </TableLayout>
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/mainView"
+        android:weightSum="5">
+
+
+        <Button
+            android:id="@+id/clear_but"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clear"
+            android:text="C"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/add_but"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="write"
+            android:text="+"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/sub_but"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="write"
+            android:text="-"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/mul_but"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="write"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="*" />
+
+        <Button
+            android:id="@+id/div_but"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="write"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="/" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
